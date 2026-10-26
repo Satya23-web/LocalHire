@@ -1,0 +1,35 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Database (Do NOT push your local development database)
+*.sqlite3
+
+# Local environment variables and secrets
+.env
+.env.local
+.secret
+secrets.json
+
+# Python virtual environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.env
+__pycache__/
+
+# Media files (Uploaded by users during development)
+/media/
+
+# Static files (Only if you collect them locally into a single root folder)
+/staticfiles/
+
+# IDE / Editor folders
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

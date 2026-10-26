@@ -1,0 +1,73 @@
+{% load static %}
+{% load socialaccount %}
+<!---{{ form.errors }}--->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup | LocalHire</title>
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+</head>
+<body>
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <h2 class="auth-title">Signup</h2>
+            
+            <form method="post" action="{% url 'signup' %}" novalidate>
+                {% csrf_token %}
+                
+                {% if form.non_field_errors %}
+                    <div class="alert-box alert-error">{{ form.non_field_errors.0 }}</div>
+                {% endif %}
+
+                <div class="input-group">
+                    <input type="text" name="username" class="auth-input {% if form.username.errors %}input-error{% endif %}" placeholder="Username" value="{{ form.username.value|default:'' }}" required>
+                    {% if form.username.errors %}<span class="error-feedback">{{ form.username.errors.0 }}</span>{% endif %}
+                </div>
+
+                <div class="input-group">
+                    <input type="email" name="email" class="auth-input {% if form.email.errors %}input-error{% endif %}" placeholder="Email" value="{{ form.email.value|default:'' }}" required>
+                    {% if form.email.errors %}<span class="error-feedback">{{ form.email.errors.0 }}</span>{% endif %}
+                </div>
+
+                <div class="input-group">
+                    <input type="password" name="password1" class="auth-input {% if form.password1.errors %}input-error{% endif %}" placeholder="Create password" required>
+                    {% if form.password1.errors %}
+                        {% for error in form.password1.errors %}
+                            <span class="error-feedback">{{ error }}</span>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="input-group">
+                    <input type="password" name="password2" class="auth-input {% if form.password2.errors %}input-error{% endif %}" placeholder="Confirm password" required>
+                    {% if form.password2.errors %}
+                        {% for error in form.password2.errors %}
+                            <span class="error-feedback">{{ error }}</span>
+                        {% endfor %}
+                    {% endif %}
+                <div>
+                
+                
+                <button type="submit" class="auth-btn">Signup</button>
+                
+                <p class="auth-switch">
+                    Already have an account? <a href="{% url 'login' %}">Login</a>
+                </p>
+
+                <div style="text-align: center; margin: 20px 0; color: #888; font-size: 14px;">Or</div>
+                
+                <a href="{% provider_login_url 'google' %}" class="social-btn">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="Google">
+                    Signup with Google
+
+                </a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

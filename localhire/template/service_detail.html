@@ -1,0 +1,14 @@
+<h1>{{ service.name }}</h1>
+
+{% if service.image %}
+<img src="{{ service.image.url }}" width="400">
+{% endif %}
+
+<p>{{ service.description }}</p>
+<p>Price: ₹{{ service.price }}</p>
+<p>Category: {{ service.category }}</p>
+
+<a href="{% url 'book_service' service.id %}">
+    <button>Book This Service</button>
+</a>
+

@@ -1,0 +1,56 @@
+{% load static %}
+{% load socialaccount %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | LocalHire</title>
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <h2>Login</h2>
+           {% if messages %}
+            <div class="messages-container">
+                {% for message in messages %}
+                    <div class="alert-box 
+                        {% if message.tags == 'error' %}
+                            alert-error
+                        {% else %}
+                            alert-success
+                        {% endif %}
+                    ">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <input type="text" name="username" class="auth-input" placeholder="Username/Email" required>
+                <input type="password" name="password" class="auth-input" placeholder="Password" required>
+                
+                <div style="text-align: right; font-size: 12px; margin-bottom: 10px;">
+                    <a href="#" style="color: #3b71f3; text-decoration: none;">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="auth-btn">Login</button>
+                
+                <p style="text-align: center; font-size: 13px; margin-top: 15px;">
+                    Don't have an account? <a href="{% url 'signup' %}" style="color: #3b71f3; font-weight: bold; text-decoration: none;">Signup</a>
+                </p>
+
+                <div style="text-align: center; margin: 20px 0; color: #f8f6f6;">Or</div>
+                    <a href="{% provider_login_url 'google' process='login' %}" class="social-btn">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="Google">
+                    Login with Google
+                </a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
