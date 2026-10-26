@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from django.conf import settings
 
 api_key = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=api_key)
 
 @api_view(['POST'])
 def chatbot_response(request):
